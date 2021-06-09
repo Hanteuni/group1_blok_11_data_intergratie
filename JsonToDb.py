@@ -128,6 +128,9 @@ def main(file):
 
         con_occ_id = 1
         for id, pgpc in pgpc_sources.items():
+            if pgpc is None:
+                continue
+                
             cursor.execute("INSERT INTO PERSON(person_id, year_of_birth, month_of_birth, gender_source_value, ethnicity_source_value, gender_concept_id, race_concept_id, ethnicity_concept_id) \
                 VALUES ({}, {}, {}, \'{}\', \'{}\', {}, {}, {})".format(
                 id, pgpc.profile.birth_year, pgpc.profile.birth_month, pgpc.profile.sex, pgpc.profile.ethnicity, 1, 1, 1))
