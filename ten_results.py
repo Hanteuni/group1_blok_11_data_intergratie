@@ -3,6 +3,7 @@ import httplib2 as http
 from urllib.parse import urlparse
 import tqdm
 import time
+import sys
 
 
 json_file = {}
@@ -77,11 +78,19 @@ def get_HGNC_name(dict,name=""):
     return name_dict
 
 
-if __name__ == '__main__':
-    fname_missense = "PGPC_0001_S1_ann.filter_missense_first.vcf"
-    fname_frame_shift = "PGPC_0001_S1_ann.frameshift_variant_first.vcf"
-    missense_dict = file_reader(fname=fname_missense, variant_type="missense_variant")
-    frame_shift_dict = file_reader(fname=fname_missense, variant_type="frame_shift_variant")
+def main(missense_file, frame_shift_file, person):
+    missense_dict = file_reader(fname=missense_file, variant_type="missense_variant")
+    frame_shift_dict = file_reader(fname=frame_shift_file, variant_type="frame_shift_variant")
     missense_name_dict = get_HGNC_name(missense_dict,name="missense")
     frame_shift_name_dict = get_HGNC_name(frame_shift_dict,name="frame_shift")
-    write_to_json(missense_dict,frame_shift_dict,missense_name_dict, frame_shift_name_dict, person=participant)
+    write_to_json(missense_dict,frame_shift_dict,missense_name_dict, frame_shift_name_dict, person=person)
+    json_writer(json_file_name)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 4:
+        print("missing arguments; need missense annotation; frame_shift annotation and person\n"
+              "exiting now...")
+        exit()
+    main(sys.argv[1],sys.argv[2],sys.argv[3])
+
