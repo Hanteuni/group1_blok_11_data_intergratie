@@ -13,14 +13,16 @@ pdf_parser			= "$baseDir/scripts/pdf_parser.py"
 json_parser			= "$baseDir/scripts/json_to_db.py"
 top_hits			= "$baseDir/scripts/top_hits.py"
 snpEFF				= "bash ${baseDir}/snpEff/exec/snpeff"
-snpSift			= "java -jar ${baseDir}/snpEff/SnpSift.jar"
+snpSift				= "java -jar ${baseDir}/snpEff/SnpSift.jar"
 
+
+// Create channels
 vcf_input = Channel.fromPath('input/*.vcf')
 pdf_input = Channel.fromPath('input/*.pdf')
 
 
 
-
+// Leest input PDF bestand en converteert het naar een JSON
 process readPDF {
 	conda "conda-forge::tika"
 	
@@ -39,6 +41,7 @@ process readPDF {
 	
 }
 
+// Schrijft de json naar de Database
 process parseJson{
 	conda "anaconda::psycopg2"
 	
@@ -47,12 +50,12 @@ process parseJson{
 
 
 	script:
-	// python ${json_parser} ${json}
 	"""
+	python ${json_parser} ${json}
 	"""
 
 }
-
+// Annoteert input VCF bestand adhv SnpEff
 process snpEff {
 	input:
 	file vcf from vcf_input
