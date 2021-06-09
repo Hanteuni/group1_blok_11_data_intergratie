@@ -2,6 +2,7 @@ import json
 import psycopg2
 from typing import Optional, Any, List, TypeVar, Type, Callable, cast
 from datetime import date
+import sys
 
 T = TypeVar("T")
 
@@ -114,10 +115,8 @@ def pgpc_information_from_dict(s: Any) -> PgpcInformation:
 def pgpc_information_to_dict(x: PgpcInformation) -> Any:
     return to_class(PgpcInformation, x)
 
-  
-# Alle meuk hierboven is gewoon voor het object georienteerd inlezen van die JSON, hieronder in main() gebeurt de magic
-def main():
-    with open("data_intergratie.json",'r') as file:
+def main(file):
+    with open(file,'r') as file:
         json_string = file.read()
         result = pgpc_information_from_dict(json.loads(json_string))
 
@@ -144,5 +143,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main() 
+    if (len(sys.argv) == 1):
+        print("Json file parameter missing, aborting.")
+        quit()
+    
+    main(sys.argv[1])
     
