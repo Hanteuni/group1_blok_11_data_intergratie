@@ -2,7 +2,7 @@ Data intergratie groep 1 pipeline
 ------
 
 Pipeline van het project
-![pipeline data intergratie](https://github.com/Hanteuni/group1_blok_11_data_intergratie/pipline_data_intergration.png)
+![pipeline data intergratie](https://github.com/Hanteuni/group1_blok_11_data_intergratie/blob/main/pipline_data_intergration.png)
 
 
 Requirements*:
