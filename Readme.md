@@ -1,7 +1,6 @@
 Data intergratie groep 1 pipeline
 ------
-
-Pipeline van het project
+#### Pipeline van het data intergratie project
 ![pipeline data intergratie](https://github.com/Hanteuni/group1_blok_11_data_intergratie/blob/main/pipline_data_intergration.png)
 
 
