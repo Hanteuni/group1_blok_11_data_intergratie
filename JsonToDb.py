@@ -7,14 +7,26 @@ import sys
 T = TypeVar("T")
 
 def from_none(x: Any) -> Any:
+    """ Helper function for asserting if the parameter type is None
+    :param x: The type to assert
+    :return: x is None
+    """
     assert x is None
     return x
 
 def from_str(x: Any) -> str:
+    """ Helper function for asserting if the parameter type is String
+    :param x: The type to assert
+    :return: x is String
+    """
     assert isinstance(x, str)
     return x
 
 def from_union(fs, x):
+    """ Helper function for splitting a union
+    :param x: The union to split
+    :return: Splitted union or False
+    """
     for f in fs:
         try:
             return f(x)
@@ -23,14 +35,29 @@ def from_union(fs, x):
     assert False
 
 def is_type(t: Type[T], x: Any) -> T:
+    """ Helper function for asserting if x is an instance of type t
+    :param x: The type to assert
+    :param t: The type with which x is asserted
+    :return: x is type t
+    """
     assert isinstance(x, t)
     return x
 
 def from_list(f: Callable[[Any], T], x: Any) -> List[T]:
+    """ Helper function for asserting if x is an instance of type t from a list
+    :param x: The type to assert
+    :param t: The type with which x is asserted
+    :return: list with x's is type t
+    """
     assert isinstance(x, list)
     return [f(y) for y in x]
 
 def to_class(c: Type[T], x: Any) -> dict:
+    """ Helper function for casting x to type t
+    :param x: The type to to cast
+    :param t: The type to which x has to be casted
+    :return: x as t if castable
+    """
     assert isinstance(x, c)
     return cast(Any, x).to_dict()
 
@@ -116,6 +143,9 @@ def pgpc_information_to_dict(x: PgpcInformation) -> Any:
     return to_class(PgpcInformation, x)
 
 def main(file):
+    """ Function which extracts the pgpc data from the created JSON file. It converts the data structure into the object oriented models described above. It will then insert these models into the postgreSQL database.
+    :param file: The JSON file containing the pgpc data
+    """
     with open(file,'r') as file:
         json_string = file.read()
         result = pgpc_information_from_dict(json.loads(json_string))
