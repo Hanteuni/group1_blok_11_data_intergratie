@@ -14,7 +14,7 @@ Nextflow
 
 ### Running the pipeline
 To run the pipeline simply use the following command
-** Let op; Deze github is al voorzien van 1 sample (PCGP 21) **
+** Let op; Deze github is al voorzien van 1 sample (PCGP 1) **
 ```
 bash nextflow pipeline.nf
 ```
