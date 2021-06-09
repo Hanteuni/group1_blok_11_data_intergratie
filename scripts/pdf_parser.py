@@ -1,5 +1,6 @@
-from tika import parser
+import sys
 import json
+from tika import parser
 
 
 def file_reader(fname, json_file_annotation):
@@ -36,15 +37,14 @@ def file_to_json(json_file_dict):
     :param json_file_dict: .json formatted dictonairy
     :return: a local .json file
     """
-    with open("data_intergratie.json", "w+") as new_json:
+    with open(sys.argv[2], "w+") as new_json:
         print("uploading the jason file... ")
         json.dump(json_file_dict, new_json)
         print("file is done")
 
 
+
 if __name__ == '__main__':
     json_file = {}
-    file_names = ["PGPC-1.pdf", "PGPC-11.pdf", "PGPC-21.pdf"]
-    for file_name in file_names:
-        json_file = file_reader(fname=file_name, json_file_annotation=json_file)
+    json_file =file_reader(fname=sys.argv[1], json_file_annotation=json_file)
     file_to_json(json_file)

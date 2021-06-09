@@ -59,7 +59,7 @@ def write_to_json(missense_dict, frame_shift_dict, missense_name_dict, frame_shi
 def json_writer():
     """"Writes the json dictonary that was created in the write_to_json fuction to a local file
     """
-    with open("data_intergratie_variants_test.json", "w+") as new_json:
+    with open("{}.json".format(sys.argv[3]), "w+") as new_json:
         print("uploading the jason file... ")
         json.dump(json_file, new_json)
         print("file is done")
