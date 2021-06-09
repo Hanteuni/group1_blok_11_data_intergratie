@@ -78,13 +78,10 @@ def get_HGNC_name(dict,name=""):
 
 
 if __name__ == '__main__':
-    participants = ["PGCP_0001","PGCP_0011","PGCP_0021"]
-    for participant in participants:
-        fname_missense = "{}_S1_ann.filter_missense_first.vcf".format(participant)
-        fname_frame_shift = "{}_S1_ann.frameshift_variant_first.vcf".format(participant)
-        missense_dict = file_reader(fname=fname_missense, variant_type="missense_variant")
-        frame_shift_dict = file_reader(fname=fname_missense, variant_type="frame_shift_variant")
-        missense_name_dict = get_HGNC_name(missense_dict,name="missense")
-        frame_shift_name_dict = get_HGNC_name(frame_shift_dict,name="frame_shift")
-        write_to_json(missense_dict,frame_shift_dict,missense_name_dict, frame_shift_name_dict, person=participant)
-    json_writer()
+    fname_missense = "PGPC_0001_S1_ann.filter_missense_first.vcf"
+    fname_frame_shift = "PGPC_0001_S1_ann.frameshift_variant_first.vcf"
+    missense_dict = file_reader(fname=fname_missense, variant_type="missense_variant")
+    frame_shift_dict = file_reader(fname=fname_missense, variant_type="frame_shift_variant")
+    missense_name_dict = get_HGNC_name(missense_dict,name="missense")
+    frame_shift_name_dict = get_HGNC_name(frame_shift_dict,name="frame_shift")
+    write_to_json(missense_dict,frame_shift_dict,missense_name_dict, frame_shift_name_dict, person=participant)
